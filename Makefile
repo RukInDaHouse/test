@@ -1,6 +1,6 @@
 TARGET=s21_decimal
 CC=gcc
-CFLAGS=-std=c11
+CFLAGS=-Wall -Wextra -Werror -std=c11
 OBJECTS=$(TARGET)_conv.o $(TARGET)_other.o $(TARGET)_subs.o $(TARGET)_comp.o $(TARGET)_math.o
 
 all: clean test
@@ -30,12 +30,12 @@ test.o: tests.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 test: test.o $(TARGET).a
-	$(CC) $(CFLAGS) $^ -lcheck -o $@
+	$(CC) $(CFLAGS) $^ -pthread -lcheck_pic -pthread -lrt -lm -lsubunit -o $@
 	./$@
 
 
 gcov_report:
-	$(CC) --coverage tests.c -o s21_test $(TARGET)_another.c $(TARGET)_compare.c $(TARGET)_converters.c $(TARGET)_subs.c $(TARGET)_math.c  -lcheck
+	$(CC) --coverage tests.c -o s21_test $(TARGET)_another.c $(TARGET)_compare.c $(TARGET)_converters.c $(TARGET)_subs.c $(TARGET)_math.c  -pthread -lcheck_pic -pthread -lrt -lm -lsubunit
 	./s21_test
 	lcov -t "s21_test" -o s21_test.info -c -d .
 	genhtml -o report s21_test.info
