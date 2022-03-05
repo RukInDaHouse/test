@@ -35,7 +35,7 @@ test: test.o $(TARGET).a
 
 
 gcov_report:
-	$(CC) --coverage tests.c -o s21_test $(TARGET)_another.c $(TARGET)_compare.c $(TARGET)_converters.c $(TARGET)_subs.c $(TARGET)_math.c -llzma `pkg-config --cflags --libs check`
+	$(CC) --coverage tests.c -o s21_test $(TARGET)_another.c $(TARGET)_compare.c $(TARGET)_converters.c $(TARGET)_subs.c $(TARGET)_math.c `pkg-config --cflags --libs check`
 	./s21_test
 	lcov -t "s21_test" -o s21_test.info -c -d .
 	genhtml -o report s21_test.info
