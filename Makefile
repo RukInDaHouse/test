@@ -1,6 +1,6 @@
 TARGET=s21_decimal
 CC=gcc
-CFLAGS=-Wall -Wextra -Werror -std=c11
+CFLAGS=-std=c11
 OBJECTS=$(TARGET)_conv.o $(TARGET)_other.o $(TARGET)_subs.o $(TARGET)_comp.o $(TARGET)_math.o
 
 all: clean test
