@@ -30,12 +30,12 @@ test.o: tests.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 test: test.o $(TARGET).a
-	$(CC) $(CFLAGS) $^ -lcheck -o $@
+	$(CC) $(CFLAGS) $^ -llzma -lcheck -o $@
 	./$@
 
 
 gcov_report:
-	$(CC) --coverage tests.c -o s21_test $(TARGET)_another.c $(TARGET)_compare.c $(TARGET)_converters.c $(TARGET)_subs.c $(TARGET)_math.c  -lcheck
+	$(CC) --coverage tests.c -o s21_test $(TARGET)_another.c $(TARGET)_compare.c $(TARGET)_converters.c $(TARGET)_subs.c $(TARGET)_math.c -llzma -lcheck
 	./s21_test
 	lcov -t "s21_test" -o s21_test.info -c -d .
 	genhtml -o report s21_test.info
